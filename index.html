@@ -6,7 +6,7 @@
     <title>CV · Tony Mallett</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <style>
+        <style>
         * {
             margin: 0;
             padding: 0;
@@ -17,13 +17,90 @@
             background: #121420ff;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
             padding: 1.5rem;
             scroll-behavior: smooth;
         }
 
+        /* Header / Contact Info */
+        .header-box {
+            background: #1b2432ff;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8),
+                        0 0 0 1px #b76d68ff,
+                        0 10px 30px -10px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(183, 109, 104, 0.5);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            max-width: 1200px;
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-name h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #f0eef5;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.1rem;
+        }
+
+        .header-title {
+            color: #d6d2e6;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        .header-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 1.8rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #d6d2e6;
+            font-size: 0.9rem;
+        }
+
+        .contact-item i {
+            font-size: 1rem;
+            width: 1.2rem;
+            text-align: center;
+        }
+
+        .contact-item a {
+            color: #d6d2e6;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            border-bottom: 1px dotted transparent;
+        }
+
+        .contact-item a:hover {
+            color: #b76d68ff;
+            border-bottom-color: rgba(183, 109, 104, 0.3);
+        }
+
+        .contact-item span {
+            color: #d6d2e6;
+        }
+
+        /* Grid */
         .cv-grid {
             max-width: 1200px;
             width: 100%;
@@ -31,9 +108,10 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 1.25rem;
             align-items: start;
-            padding: 2rem 0;
+            padding: 0 0 2rem 0;
         }
 
+        /* Cards */
         .card {
             background: #2c2b3cff;
             backdrop-filter: blur(4px);
@@ -52,9 +130,6 @@
             color: #f0eef5;
             height: auto;
             min-height: 140px;
-        }
-
-        .card {
             grid-column: span 1;
             grid-row: span 1;
             transform: scale(0.92);
@@ -64,6 +139,26 @@
         }
 
         .card.active {
+            grid-column: span 2;
+            grid-row: span 2;
+            transform: scale(1);
+            opacity: 1;
+            filter: saturate(1) brightness(1.05);
+            background: #1b2432ff;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8),
+                0 0 0 1px #b76d68ff,
+                0 10px 30px -10px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(183, 109, 104, 0.5);
+            padding: 2rem 1.8rem;
+            z-index: 2;
+            height: auto;
+            min-height: 200px;
+        }
+
+        /* make first card active by default (About Me) */
+        .card:first-child {
             grid-column: span 2;
             grid-row: span 2;
             transform: scale(1);
@@ -185,6 +280,30 @@
             color: #d48a84;
         }
 
+        .badge-icon {
+            background: rgba(64, 63, 76, 0.7);
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            color: #d6d2e6;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(183, 109, 104, 0.2);
+            flex-shrink: 0;
+        }
+
+        .active .badge-icon {
+            background: rgba(183, 109, 104, 0.2);
+            color: #f0eef5;
+            border-color: #b76d68ff;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid rgba(183, 109, 104, 0.2);
+            margin: 0.5rem 0 0.8rem;
+        }
+
         /* dropdown accordion styles */
         .dropdown-section {
             margin-bottom: 0.5rem;
@@ -257,6 +376,130 @@
             background: rgba(183, 109, 104, 0.25);
         }
 
+        /* skill dropdown styles */
+        .skill-dropdown {
+            margin-top: 0.3rem;
+            border: 1px solid rgba(183, 109, 104, 0.15);
+            border-radius: 0.8rem;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-dropdown .dropdown-header {
+            background: rgba(183, 109, 104, 0.05);
+            padding: 0.3rem 0.8rem;
+            font-size: 0.9rem;
+            color: #d6d2e6;
+        }
+
+        .skill-dropdown .dropdown-header:hover {
+            background: rgba(183, 109, 104, 0.12);
+        }
+
+        .skill-dropdown .dropdown-body {
+            padding: 0 0.8rem;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-dropdown .dropdown-body.open {
+            padding: 0.4rem 0.8rem 0.8rem 0.8rem;
+        }
+
+        .skill-dropdown .dropdown-body ul {
+            padding-left: 0.5rem;
+            margin: 0.2rem 0;
+            list-style: disc;
+        }
+
+        .skill-dropdown .dropdown-body ul li {
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+            color: #d6d2e6;
+            display: list-item;
+            gap: 0;
+        }
+
+        /* sub-dropdown styles */
+        .sub-dropdown {
+            margin-top: 0.4rem;
+            border: 1px solid rgba(183, 109, 104, 0.12);
+            border-radius: 0.6rem;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .sub-dropdown .dropdown-header {
+            background: rgba(183, 109, 104, 0.03);
+            padding: 0.25rem 0.7rem;
+            font-size: 0.85rem;
+            color: #d6d2e6;
+            font-weight: 500;
+        }
+
+        .sub-dropdown .dropdown-header:hover {
+            background: rgba(183, 109, 104, 0.08);
+        }
+
+        .sub-dropdown .dropdown-body {
+            padding: 0 0.7rem;
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .sub-dropdown .dropdown-body.open {
+            padding: 0.3rem 0.7rem 0.6rem 0.7rem;
+        }
+
+        .sub-dropdown .dropdown-body ul {
+            padding-left: 0.5rem;
+            margin: 0.1rem 0;
+            list-style: disc;
+        }
+
+        .sub-dropdown .dropdown-body ul li {
+            margin-bottom: 0.2rem;
+            font-size: 0.85rem;
+            color: #d6d2e6;
+            display: list-item;
+            gap: 0;
+            line-height: 1.4;
+        }
+
+        .sub-dropdown .dropdown-body ul li strong {
+            color: #b76d68ff;
+            font-weight: 600;
+        }
+
+        /* Make the skills card scrollable */
+        .card[data-index="3"] .card-content {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        /* Global scrollbar styling */
+        *::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background: #b76d68ff;
+            border-radius: 10px;
+        }
+
+        *::-webkit-scrollbar-thumb:hover {
+            background: #d48a84;
+        }
+
+        /* Firefox scrollbar styling */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #b76d68ff rgba(0, 0, 0, 0.2);
+        }
+
         /* arrow buttons container */
         .nav-arrows {
             display: flex;
@@ -325,55 +568,12 @@
             font-size: 0.8rem;
         }
 
-        /* make first card active by default (About Me) */
-        .card:first-child {
-            grid-column: span 2;
-            grid-row: span 2;
-            transform: scale(1);
-            opacity: 1;
-            filter: saturate(1) brightness(1.05);
-            background: #1b2432ff;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8),
-                0 0 0 1px #b76d68ff,
-                0 10px 30px -10px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(183, 109, 104, 0.5);
-            padding: 2rem 1.8rem;
-            z-index: 2;
-            height: auto;
-            min-height: 200px;
-        }
-
-        .badge-icon {
-            background: rgba(64, 63, 76, 0.7);
-            border-radius: 30px;
-            padding: 0.2rem 0.8rem;
-            font-size: 0.7rem;
-            color: #d6d2e6;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            border: 1px solid rgba(183, 109, 104, 0.2);
-            flex-shrink: 0;
-        }
-
-        .active .badge-icon {
-            background: rgba(183, 109, 104, 0.2);
-            color: #f0eef5;
-            border-color: #b76d68ff;
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid rgba(183, 109, 104, 0.2);
-            margin: 0.5rem 0 0.8rem;
-        }
-
+        /* Responsive */
         @media (max-width: 800px) {
             .cv-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 0.8rem;
-                padding: 1rem 0;
+                padding: 0 0 1rem 0;
             }
             .card.active,
             .card:first-child {
@@ -408,6 +608,20 @@
             .nav-arrows {
                 flex-wrap: wrap;
             }
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+            }
+            .header-name h1 {
+                font-size: 1.8rem;
+            }
+            .header-contact {
+                gap: 0.6rem 1.2rem;
+            }
+            .contact-item {
+                font-size: 0.8rem;
+            }
         }
 
         @media (max-width: 500px) {
@@ -431,51 +645,52 @@
             .card {
                 scroll-margin: 0.5rem;
             }
+            .header-box {
+                padding: 1rem 1.2rem;
+            }
+            .header-name h1 {
+                font-size: 1.5rem;
+            }
+            .header-contact {
+                flex-direction: column;
+                gap: 0.4rem;
+            }
         }
-        /* skill dropdown styles */
-.skill-dropdown {
-    margin-top: 0.3rem;
-    border: 1px solid rgba(183, 109, 104, 0.15);
-    border-radius: 0.8rem;
-    background: rgba(0, 0, 0, 0.15);
-}
-
-.skill-dropdown .dropdown-header {
-    background: rgba(183, 109, 104, 0.05);
-    padding: 0.3rem 0.8rem;
-    font-size: 0.9rem;
-    color: #d6d2e6;
-}
-
-.skill-dropdown .dropdown-header:hover {
-    background: rgba(183, 109, 104, 0.12);
-}
-
-.skill-dropdown .dropdown-body {
-    padding: 0 0.8rem;
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.skill-dropdown .dropdown-body.open {
-    padding: 0.4rem 0.8rem 0.8rem 0.8rem;
-}
-
-.skill-dropdown .dropdown-body ul {
-    padding-left: 0.5rem;
-    margin: 0.2rem 0;
-    list-style: disc;
-}
-
-.skill-dropdown .dropdown-body ul li {
-    margin-bottom: 0.3rem;
-    font-size: 0.9rem;
-    color: #d6d2e6;
-    display: list-item;
-    gap: 0;
-}
     </style>
 </head>
 <body>
+    <!-- Header / Contact Info - Outside the grid -->
+    <div class="header-box">
+        <div class="header-content">
+            <div class="header-name">
+                <h1>Tony Mallett</h1>
+                <p class="header-title">IT Student & Aspiring Cybersecurity Professional</p>
+            </div>
+            <div class="header-contact">
+                <div class="contact-item">
+                    <i class="fas fa-envelope" style="color: #b76d68ff;"></i>
+                    <a href="mailto:tony.mallett@example.com">anthony1mallett@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone" style="color: #b76d68ff;"></i>
+                    <a href="tel:+447555555555">+44 7746 409 600</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt" style="color: #b76d68ff;"></i>
+                    <span>Princes Risborough, UK</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github" style="color: #b76d68ff;"></i>
+                    <a href="https://github.com/tony-mall" target="_blank">github.com/tony-mall</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin" style="color: #b76d68ff;"></i>
+                    <a href="#" target="_blank">LinkedIn (Coming Soon)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="cv-grid" id="cvGrid">
 <!-- 1. About Me (active by default) -->
 <div class="card active" data-index="0">
@@ -484,7 +699,27 @@
         <span class="badge-icon">intro</span>
     </div>
     <div class="card-content">
-        <p>From IT classes in Year 1 to present day cybersecurity courses, computer science has always been a passion of mine. Since my early introduction to the world of computer science, tinkering with systems has always sparked my interest and inspired me to dive further into the subject. By Year 8 I started learning Python, developing small programs I would showcase to friends and family. This knowledge hungry mindset eventually led me to discover Linux – after installing it on my laptop, I quickly learnt common commands and began to understand how the operating system functioned. After learning about the WannaCry attack, cybersecurity piqued my interest. I used platforms like TryHackMe and HackTheBox to self-teach real-world skills. I hope to specialise in ethical hacking and red teaming. Outside of tech, I play guitar and skateboard – both require precision and dedication, traits I apply to computer science. Skateboarding has taught me the value of hard work, with some tricks taking months to learn properly.</p>
+        <!-- DROPDOWN 1: Introduction -->
+        <div class="dropdown-section">
+            <div class="dropdown-header" data-target="introduction">
+                <span><i class="fas fa-user" style="margin-right:10px; color:#b76d68ff;"></i>Introduction</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="dropdown-body" id="introduction">
+                <p>From IT classes in Year 1 to present day cybersecurity courses, computer science has always been a passion of mine. Since my early introduction to the world of computer science, tinkering with systems has always sparked my interest and inspired me to dive further into the subject. By Year 8 I started learning Python, developing small programs I would showcase to friends and family. This knowledge hungry mindset eventually led me to discover Linux – after installing it on my laptop, I quickly learnt common commands and began to understand how the operating system functioned. After learning about the WannaCry attack, cybersecurity piqued my interest. I used platforms like TryHackMe and HackTheBox to self-teach real-world skills. I hope to specialise in ethical hacking and red teaming. Outside of tech, I play guitar and skateboard – both require precision and dedication, traits I apply to computer science. Skateboarding has taught me the value of hard work, with some tricks taking months to learn properly.</p>
+            </div>
+        </div>
+
+        <!-- DROPDOWN 2: Career Objective -->
+        <div class="dropdown-section">
+            <div class="dropdown-header" data-target="career-objective">
+                <span><i class="fas fa-bullseye" style="margin-right:10px; color:#b76d68ff;"></i>Career Objective</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="dropdown-body" id="career-objective">
+                <p>I have always had a natural curiosity and passion towards computers since I was young. Although I started by learning coding languages such as Python, I quickly became fascinated by Cybersecurity and how important it is in the modern world. Although I wish to one day become apart of a red team, I wish to grow my experience in the IT sector as a whole; creating a strong foundation of all IT related topics</p>
+            </div>
+        </div>
     </div>
     <div class="nav-arrows">
         <button class="arrow-btn" data-action="prev"><i class="fas fa-arrow-left"></i> <span>prev</span></button>
@@ -576,283 +811,313 @@
             </div>
         </div>
 
-   <!-- 4. Skills -->
+<!-- 4. Skills -->
 <div class="card" data-index="3">
     <div class="card-header">
         <span class="card-title"><i class="fas fa-code" style="margin-right:6px;"></i>Skills</span>
         <span class="badge-icon">tools</span>
     </div>
     <div class="card-content">
-        <ul>
-            <li>
-                <i class="fas fa-users"></i>
-                <span class="skill-label">
-                    <span class="skill-name">People skills</span>
-                    <span class="skill-desc">communication, teamwork, adaptability</span>
-                </span>
-            </li>
-            <li>
-                <i class="fab fa-python"></i>
-                <span class="skill-label">
-                    <span class="skill-name">Python</span>
-                    <span class="skill-desc">
-                        <div class="dropdown-section skill-dropdown">
-                            <div class="dropdown-header" data-target="python-details">
-                                <span>8 years experience - (intermediate) <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
-                            </div>
-                            <div class="dropdown-body" id="python-details">
-                                <!-- Sub-dropdown 1: Projects -->
-                                <div class="dropdown-section sub-dropdown">
-                                    <div class="dropdown-header" data-target="python-projects">
-                                        <span><i class="fas fa-folder-open"></i> Projects <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+        <!-- DROPDOWN 1: Core ICT Skills -->
+        <div class="dropdown-section">
+            <div class="dropdown-header" data-target="core-ict">
+                <span><i class="fas fa-desktop" style="margin-right:10px; color:#b76d68ff;"></i>Core ICT Skills</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="dropdown-body" id="core-ict">
+                <ul>
+                    <li>
+                        <i class="fab fa-linux"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">Linux</span>
+                            <span class="skill-desc">
+                                <div class="dropdown-section skill-dropdown">
+                                    <div class="dropdown-header" data-target="linux-details">
+                                        <span>Used as daily driver for 4 years <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
                                     </div>
-                                    <div class="dropdown-body" id="python-projects">
-                                        <ul>
-                                            <li><strong>Bitcoin Scraper:</strong> Scrapes details on bitcoin wallets using Beautiful Soup</li>
-                                            <li><strong>Craiyon Discord Bot:</strong> A Discord bot to access the Craiyon API from Discord</li>
-                                            <li><strong>Uberduck Discord Bot:</strong> Text to speech in voice channels using the Uberduck API</li>
-                                            <li><strong>Binary Enumerator:</strong> Shows what binaries you have RWX access to. Has a use case for SUID bit vulnerabilities</li>
-                                            <li><strong>IPScanner:</strong> Generates random IPs, checks if they are valid, scans a specified port on the system. Also has Discord webhook support. I rewrite this project in every new language I try</li>
-                                            <li><strong>File Changer:</strong> One of the first Python programs I ever wrote - completely useless. It is here to act as a way to show how my code has improved over time</li>
-                                            <li><strong>File Sorter:</strong> Sorts files into folders based on file extension</li>
-                                        </ul>
+                                    <div class="dropdown-body" id="linux-details">
+                                        <!-- Sub-dropdown 1: Distros -->
+                                        <div class="dropdown-section sub-dropdown">
+                                            <div class="dropdown-header" data-target="linux-distros">
+                                                <span><i class="fas fa-server"></i> Distros Used <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                            </div>
+                                            <div class="dropdown-body" id="linux-distros">
+                                                <ul>
+                                                    <li><strong>Arch Linux:</strong> Daily drove for over a year, experience using the "pacman" and "yay" package managers</li>
+                                                    <li><strong>Kali/ Blackarch Linux:</strong> Used inside a Virtual Machine in order to complete TryHackMe, HackTheBox and other similar Cybersecurity challenges</li>
+                                                    <li><strong>Gentoo:</strong> Did not daily drive for very long due to my preference to Arch Linux but learnt a lot when building the distro</li>
+                                                    <li><strong>Ubuntu/Debian:</strong> Lots of experience on both distros and many derivatives of them. Used Debain a lot mainly on my Raspberry Pi. Daily drove ubuntu for a few months, also used POP OS as a gaming distro, before making the switch to Arch</li>
+                                                    <li><strong>Manjaro/EndeavourOS:</strong> Another 2 Arch Linux based distros, used both for around 4 months.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- Sub-dropdown 2: Projects -->
+                                        <div class="dropdown-section sub-dropdown">
+                                            <div class="dropdown-header" data-target="linux-projects">
+                                                <span><i class="fas fa-folder-open"></i> Projects & Configurations <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                            </div>
+                                            <div class="dropdown-body" id="linux-projects">
+                                                <ul>
+                                                    <li><strong>Linux Commands-rs:</strong> Rewriting Linux tools in Rust shows deep understanding of system commands</li>
+                                                    <li><strong>Server Setup:</strong> Ran a small PI server for local FTP storage, website hosting and scripting. Current plans to build a new local server for learning purposes (e.g. configuring web servers).</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- Sub-dropdown 3: Skills -->
+                                        <div class="dropdown-section sub-dropdown">
+                                            <div class="dropdown-header" data-target="linux-skills">
+                                                <span><i class="fas fa-terminal"></i> Command Line Skills <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                            </div>
+                                            <div class="dropdown-body" id="linux-skills">
+                                                <ul>
+                                                    <li><strong>Package Managers:</strong> Experience with apt, pacman, yay, flatpak</li>
+                                                    <li><strong>System Administration:</strong> Daily driving for multiple years has led me to gain a strong understanding of all basic commands as well as systemd and other sys-admin releated commands</li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- Sub-dropdown 2: Libraries & Frameworks -->
-                                <div class="dropdown-section sub-dropdown">
-                                    <div class="dropdown-header" data-target="python-libraries">
-                                        <span><i class="fas fa-cubes"></i> Libraries & Frameworks <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
-                                    </div>
-                                    <div class="dropdown-body" id="python-libraries">
-                                        <ul>
-                                            <li><strong>BeautifulSoup4:</strong> Used for web scraping in Bitcoin Scraper project</li>
-                                            <li><strong>Requests:</strong> Used for API calls in Discord bot projects</li>
-                                            <li><strong>Discord.py:</strong> Used for creating Discord bots (Craiyon, Uberduck)</li>
-                                           
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Sub-dropdown 3: Coursework -->
-                                <div class="dropdown-section sub-dropdown">
-                                    <div class="dropdown-header" data-target="python-coursework">
-                                        <span><i class="fas fa-graduation-cap"></i> Coursework <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
-                                    </div>
-                                    <div class="dropdown-body" id="python-coursework">
-                                        <ul>
-                                            <li><strong>Unit 1:</strong> Completed OOP module in college, reinforcing knowledge of how OOP langauges function; in general; as well as python specific</li>
+                            </span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fab fa-windows"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">Windows</span>
+                            <span class="skill-desc">Used as home desktop PC, entry level command line experience and understanding of Entry Windows Server</span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fab fa-apple"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">macOS</span>
+                            <span class="skill-desc">Current daily driver</span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fas fa-file-excel"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">Microsoft Excel</span>
+                            <span class="skill-desc">Received Distinction in Excel: Data Modelling Unit 5</span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fas fa-file-word"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">Microsoft Word</span>
+                            <span class="skill-desc">Used for creating documents for many years</span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fas fa-file-powerpoint"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">Microsoft PowerPoint</span>
+                            <span class="skill-desc">Used for creating powerpoints for many years</span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fas fa-database"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">Microsoft Access</span>
+                            <span class="skill-desc">Received Merit in Access: Creating Systems To Manage Information Unit 2</span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fab fa-html5"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">HTML</span>
+                            <span class="skill-desc">Experience from Year 8 - developing my own websites along with a Website Development Unit</span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fab fa-css3-alt"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">CSS</span>
+                            <span class="skill-desc">See HTML</span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fab fa-js"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">JavaScript</span>
+                            <span class="skill-desc">See HTML</span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fas fa-code"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">VS Code</span>
+                            <span class="skill-desc">Main IDE for many years, solid understanding of plugins and shortcuts</span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fab fa-git-alt"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">Git</span>
+                            <span class="skill-desc">version control</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-                                        </ul>
+        <!-- DROPDOWN 2: Development Skills -->
+        <div class="dropdown-section">
+            <div class="dropdown-header" data-target="dev-skills">
+                <span><i class="fas fa-code" style="margin-right:10px; color:#b76d68ff;"></i>Development Skills</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="dropdown-body" id="dev-skills">
+                <ul>
+                    <li>
+                        <i class="fab fa-python"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">Python</span>
+                            <span class="skill-desc">
+                                <div class="dropdown-section skill-dropdown">
+                                    <div class="dropdown-header" data-target="python-details">
+                                        <span>8 years experience - (intermediate) <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                    </div>
+                                    <div class="dropdown-body" id="python-details">
+                                        <!-- Sub-dropdown 1: Projects -->
+                                        <div class="dropdown-section sub-dropdown">
+                                            <div class="dropdown-header" data-target="python-projects">
+                                                <span><i class="fas fa-folder-open"></i> Projects <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                            </div>
+                                            <div class="dropdown-body" id="python-projects">
+                                                <ul>
+                                                    <li><strong>Bitcoin Scraper:</strong> Scrapes details on bitcoin wallets using Beautiful Soup</li>
+                                                    <li><strong>Craiyon Discord Bot:</strong> A Discord bot to access the Craiyon API from Discord</li>
+                                                    <li><strong>Uberduck Discord Bot:</strong> Text to speech in voice channels using the Uberduck API</li>
+                                                    <li><strong>Binary Enumerator:</strong> Shows what binaries you have RWX access to. Has a use case for SUID bit vulnerabilities</li>
+                                                    <li><strong>IPScanner:</strong> Generates random IPs, checks if they are valid, scans a specified port on the system. Also has Discord webhook support. I rewrite this project in every new language I try</li>
+                                                    <li><strong>File Changer:</strong> One of the first Python programs I ever wrote - completely useless. It is here to act as a way to show how my code has improved over time</li>
+                                                    <li><strong>File Sorter:</strong> Sorts files into folders based on file extension</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- Sub-dropdown 2: Libraries & Frameworks -->
+                                        <div class="dropdown-section sub-dropdown">
+                                            <div class="dropdown-header" data-target="python-libraries">
+                                                <span><i class="fas fa-cubes"></i> Libraries & Frameworks <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                            </div>
+                                            <div class="dropdown-body" id="python-libraries">
+                                                <ul>
+                                                    <li><strong>BeautifulSoup4:</strong> Used for web scraping in Bitcoin Scraper project</li>
+                                                    <li><strong>Requests:</strong> Used for API calls in Discord bot projects</li>
+                                                    <li><strong>Discord.py:</strong> Used for creating Discord bots (Craiyon, Uberduck)</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- Sub-dropdown 3: Coursework -->
+                                        <div class="dropdown-section sub-dropdown">
+                                            <div class="dropdown-header" data-target="python-coursework">
+                                                <span><i class="fas fa-graduation-cap"></i> Coursework <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                            </div>
+                                            <div class="dropdown-body" id="python-coursework">
+                                                <ul>
+                                                    <li><strong>Unit 1:</strong> Completed OOP module in college, reinforcing knowledge of how OOP langauges function; in general; as well as python specific</li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </span>
-                </span>
-            </li>
-            <li>
-                <i class="fas fa-cog"></i>
-                <span class="skill-label">
-                    <span class="skill-name">Rust Lang</span>
-                    <span class="skill-desc">
-                        <div class="dropdown-section skill-dropdown">
-                            <div class="dropdown-header" data-target="rust-details">
-                                <span>3 years experience - (novice) <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
-                            </div>
-                            <div class="dropdown-body" id="rust-details">
-                                <!-- Sub-dropdown 1: Projects -->
-                                <div class="dropdown-section sub-dropdown">
-                                    <div class="dropdown-header" data-target="rust-projects">
-                                        <span><i class="fas fa-folder-open"></i> Projects <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                            </span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fas fa-cog"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">Rust Lang</span>
+                            <span class="skill-desc">
+                                <div class="dropdown-section skill-dropdown">
+                                    <div class="dropdown-header" data-target="rust-details">
+                                        <span>3 years experience - (novice) <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
                                     </div>
-                                    <div class="dropdown-body" id="rust-projects">
-                                        <ul>
-                                            <li><strong>Linux Commands-rs:</strong> A small project rewriting some standard Linux tools in Rust. Tools included: cat. TODO: add more tools</li>
-                                            <li><strong>File Splitter:</strong> A program that splits big files into smaller files. TODO: add basic functionality (repo is pretty much a placeholder at the moment)</li>
-                                            <li><strong>Countdown Timer:</strong> Counts down from a given number. TODO: add option to play noise when countdown is finished</li>
-                                            <li><strong>CSV to JSON:</strong> A program to convert CSV to JSON (and 2D lists)</li>
-                                            <li><strong>Denary to Binary Converter:</strong> Converts numbers from denary to binary</li>
-                                        </ul>
+                                    <div class="dropdown-body" id="rust-details">
+                                        <!-- Sub-dropdown 1: Projects -->
+                                        <div class="dropdown-section sub-dropdown">
+                                            <div class="dropdown-header" data-target="rust-projects">
+                                                <span><i class="fas fa-folder-open"></i> Projects <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                            </div>
+                                            <div class="dropdown-body" id="rust-projects">
+                                                <ul>
+                                                    <li><strong>Linux Commands-rs:</strong> A small project rewriting some standard Linux tools in Rust. Tools included: cat. TODO: add more tools</li>
+                                                    <li><strong>File Splitter:</strong> A program that splits big files into smaller files. TODO: add basic functionality (repo is pretty much a placeholder at the moment)</li>
+                                                    <li><strong>Countdown Timer:</strong> Counts down from a given number. TODO: add option to play noise when countdown is finished</li>
+                                                    <li><strong>CSV to JSON:</strong> A program to convert CSV to JSON (and 2D lists)</li>
+                                                    <li><strong>Denary to Binary Converter:</strong> Converts numbers from denary to binary</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- Sub-dropdown 2: Concepts -->
+                                        <div class="dropdown-section sub-dropdown">
+                                            <div class="dropdown-header" data-target="rust-concepts">
+                                                <span><i class="fas fa-brain"></i> Concepts Learned <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                            </div>
+                                            <div class="dropdown-body" id="rust-concepts">
+                                                <ul>
+                                                    <li><strong>Ownership & Borrowing:</strong> Applied in rewriting Linux tools and file manipulation projects</li>
+                                                    <li><strong>Lifetimes:</strong> Understanding through systems programming concepts</li>
+                                                    <li><strong>Traits & Generics:</strong> Used in CSV to JSON converter and binary converter</li>
+                                                    <li><strong>Error Handling:</strong> Implemented in all projects, especially file operations</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- Sub-dropdown 3: Future Goals -->
+                                        <div class="dropdown-section sub-dropdown">
+                                            <div class="dropdown-header" data-target="rust-goals">
+                                                <span><i class="fas fa-rocket"></i> Future Goals <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                            </div>
+                                            <div class="dropdown-body" id="rust-goals">
+                                                <ul>
+                                                    <li><strong>Rust Network Modules:</strong> Understand how to further use Rust to interact with networks in; hopefully one day developing my skills to develop POC network exploits as well as reconnaissance tools</li>
+                                                    <li><strong>Systems Programming:</strong> Continue exploring low-level programming with Rust</li>
+                                                    <li><strong>Open Source Contribution:</strong> Improve my skills to the point I am able to valuably contribute to open-source Rust projects</li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- Sub-dropdown 2: Concepts -->
-                                <div class="dropdown-section sub-dropdown">
-                                    <div class="dropdown-header" data-target="rust-concepts">
-                                        <span><i class="fas fa-brain"></i> Concepts Learned <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
-                                    </div>
-                                    <div class="dropdown-body" id="rust-concepts">
-                                        <ul>
-                                            <li><strong>Ownership & Borrowing:</strong> Applied in rewriting Linux tools and file manipulation projects</li>
-                                            <li><strong>Lifetimes:</strong> Understanding through systems programming concepts</li>
-                                            <li><strong>Traits & Generics:</strong> Used in CSV to JSON converter and binary converter</li>
-                                            <li><strong>Error Handling:</strong> Implemented in all projects, especially file operations</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Sub-dropdown 3: Future Goals -->
-                                <div class="dropdown-section sub-dropdown">
-                                    <div class="dropdown-header" data-target="rust-goals">
-                                        <span><i class="fas fa-rocket"></i> Future Goals <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
-                                    </div>
-                                    <div class="dropdown-body" id="rust-goals">
-                                        <ul>
-                                            <li><strong>Rust Network Modules:</strong> Understand how to further use Rust to interact with networks in; hopefully one day developing my skills to develop POC network exploits as well as reconnaissance tools</li>
-                                            <li><strong>Systems Programming:</strong> Continue exploring low-level programming with Rust</li>
-                                            <li><strong>Open Source Contribution:</strong> Improve my skills to the point I am able to valuably contribute to open-source Rust projects</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </span>
-                </span>
-            </li>
-            <li>
-                <i class="fab fa-linux"></i>
-                <span class="skill-label">
-                    <span class="skill-name">Linux</span>
-                    <span class="skill-desc">
-                        <div class="dropdown-section skill-dropdown">
-                            <div class="dropdown-header" data-target="linux-details">
-                                <span>Used as daily driver for 4 years <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
-                            </div>
-                            <div class="dropdown-body" id="linux-details">
-                                <!-- Sub-dropdown 1: Distros -->
-                                <div class="dropdown-section sub-dropdown">
-                                    <div class="dropdown-header" data-target="linux-distros">
-                                        <span><i class="fas fa-server"></i> Distros Used <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
-                                    </div>
-                                    <div class="dropdown-body" id="linux-distros">
-                                        <ul>
-                                            <li><strong>Arch Linux:</strong> Daily drove for over a year, experience using the "pacman" and "yay" package managers</li>
-                                            <li><strong>Kali/ Blackarch Linux:</strong> Used inside a Virtual Machine in order to complete TryHackMe, HackTheBox and other similar Cybersecurity challenges</li>
+                            </span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">Cybersecurity</span>
+                            <span class="skill-desc">TryHackMe - see links, HackTheBox</span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">Codewars</span>
+                            <span class="skill-desc">see links</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-                                            <li><strong>Gentoo:</strong> Did not daily drive for very long due to my preference to Arch Linux but learnt a lot when building the distro</li>
-                                            <li><strong>Ubuntu/Debian:</strong> Lots of experience on both distros and many derivatives of them. Used Debain a lot mainly on my Raspberry Pi. Daily drove ubuntu for a few months, also used POP OS as a gaming distro, before making the switch to Arch</li>
-                                            <li><strong>Manjaro/EndeavourOS:</strong> Another 2 Arch Linux based distros, used both for around 4 months.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Sub-dropdown 2: Projects -->
-                                <div class="dropdown-section sub-dropdown">
-                                    <div class="dropdown-header" data-target="linux-projects">
-                                        <span><i class="fas fa-folder-open"></i> Projects & Configurations <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
-                                    </div>
-                                    <div class="dropdown-body" id="linux-projects">
-                                        <ul>
-                                            <li><strong>Linux Commands-rs:</strong> Rewriting Linux tools in Rust shows deep understanding of system commands</li>
-                                            <li><strong>Server Setup:</strong> Ran a small PI server for local FTP storage, website hosting and scripting. Current plans to build a new local server for learning purposes (e.g. configuring web servers).</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Sub-dropdown 3: Skills -->
-                                <div class="dropdown-section sub-dropdown">
-                                    <div class="dropdown-header" data-target="linux-skills">
-                                        <span><i class="fas fa-terminal"></i> Command Line Skills <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
-                                    </div>
-                                    <div class="dropdown-body" id="linux-skills">
-                                        <ul>
-                                            <li><strong>Package Managers:</strong> Experience with apt, pacman, yay, flatpak</li>
-                                            <li><strong>System Administration:</strong> Daily driving for multiple years has led me to gain a strong understanding of all basic commands as well as systemd and other sys-admin releated commands</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </span>
-                </span>
-            </li>
-            <li>
-                <i class="fab fa-git-alt"></i>
-                <span class="skill-label">
-                    <span class="skill-name">Git</span>
-                    <span class="skill-desc">version control</span>
-                </span>
-            </li>
-            <li>
-                <i class="fas fa-shield-alt"></i>
-                <span class="skill-label">
-                    <span class="skill-name">Cybersecurity</span>
-                    <span class="skill-desc">TryHackMe - see links, HackTheBox</span>
-                </span>
-            </li>
-            <li>
-                <i class="fas fa-shield-alt"></i>
-                <span class="skill-label">
-                    <span class="skill-name">Codewars</span>
-                    <span class="skill-desc">see links</span>
-                </span>
-            </li>
-            <li>
-                <i class="fas fa-file-excel"></i>
-                <span class="skill-label">
-                    <span class="skill-name">Microsoft Excel</span>
-                    <span class="skill-desc">Received Distinction in Excel: Data Modelling Unit 5</span>
-                </span>
-            </li>
-            <li>
-                <i class="fas fa-file-word"></i>
-                <span class="skill-label">
-                    <span class="skill-name">Microsoft Word</span>
-                    <span class="skill-desc">Used for creating documents for many years</span>
-                </span>
-            </li>
-            <li>
-                <i class="fas fa-file-powerpoint"></i>
-                <span class="skill-label">
-                    <span class="skill-name">Microsoft PowerPoint</span>
-                    <span class="skill-desc">Used for creating powerpoints for many years</span>
-                </span>
-            </li>
-            <li>
-                <i class="fas fa-database"></i>
-                <span class="skill-label">
-                    <span class="skill-name">Microsoft Access</span>
-                    <span class="skill-desc">Received Merit in Access: Creating Systems To Manage Information Unit 2</span>
-                </span>
-            </li>
-            <li>
-                <i class="fab fa-windows"></i>
-                <span class="skill-label">
-                    <span class="skill-name">Windows</span>
-                    <span class="skill-desc">Used as home desktop PC, entry level command line experience and understanding of Entry Windows Server</span>
-                </span>
-            </li>
-            <li>
-                <i class="fab fa-apple"></i>
-                <span class="skill-label">
-                    <span class="skill-name">macOS</span>
-                    <span class="skill-desc">Current daily driver</span>
-                </span>
-            </li>
-            <li>
-                <i class="fab fa-html5"></i>
-                <span class="skill-label">
-                    <span class="skill-name">HTML</span>
-                    <span class="skill-desc">Experience from Year 8 - developing my own websites along with a Website Development Unit</span>
-                </span>
-            </li>
-            <li>
-                <i class="fab fa-css3-alt"></i>
-                <span class="skill-label">
-                    <span class="skill-name">CSS</span>
-                    <span class="skill-desc">See HTML</span>
-                </span>
-            </li>
-            <li>
-                <i class="fab fa-js"></i>
-                <span class="skill-label">
-                    <span class="skill-name">JavaScript</span>
-                    <span class="skill-desc">See HTML</span>
-                </span>
-            </li>
-            <li>
-                <i class="fas fa-code"></i>
-                <span class="skill-label">
-                    <span class="skill-name">VS Code</span>
-                    <span class="skill-desc">Main IDE for many years, solid understanding of plugins and shortcuts</span>
-                </span>
-            </li>
-        </ul>
+        <!-- DROPDOWN 3: Soft Skills -->
+        <div class="dropdown-section">
+            <div class="dropdown-header" data-target="soft-skills">
+                <span><i class="fas fa-users" style="margin-right:10px; color:#b76d68ff;"></i>Soft Skills</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="dropdown-body" id="soft-skills">
+                <ul>
+                    <li>
+                        <i class="fas fa-users"></i>
+                        <span class="skill-label">
+                            <span class="skill-name">People skills</span>
+                            <span class="skill-desc">communication, teamwork, adaptability</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="nav-arrows">
         <button class="arrow-btn" data-action="prev"><i class="fas fa-arrow-left"></i> <span>prev</span></button>
