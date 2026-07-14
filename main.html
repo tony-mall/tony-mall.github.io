@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV · Tony Mallett</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #121420ff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            padding: 1.5rem;
+            scroll-behavior: smooth;
+        }
+
+        .cv-grid {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            align-items: start;
+            padding: 2rem 0;
+        }
+
+        .card {
+            background: #2c2b3cff;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.7),
+                0 8px 24px -6px rgba(0, 0, 0, 0.5);
+            padding: 1.5rem 1.25rem;
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+            border: 1px solid rgba(183, 109, 104, 0.2);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            cursor: default;
+            scroll-margin: 2rem;
+            color: #f0eef5;
+            height: auto;
+            min-height: 140px;
+        }
+
+        .card {
+            grid-column: span 1;
+            grid-row: span 1;
+            transform: scale(0.92);
+            opacity: 0.75;
+            filter: saturate(0.7) brightness(0.9);
+            box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.6);
+        }
+
+        .card.active {
+            grid-column: span 2;
+            grid-row: span 2;
+            transform: scale(1);
+            opacity: 1;
+            filter: saturate(1) brightness(1.05);
+            background: #1b2432ff;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8),
+                0 0 0 1px #b76d68ff,
+                0 10px 30px -10px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(183, 109, 104, 0.5);
+            padding: 2rem 1.8rem;
+            z-index: 2;
+            height: auto;
+            min-height: 200px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: -0.01em;
+            color: #f0eef5;
+            background: rgba(64, 63, 76, 0.6);
+            padding: 0.2rem 1rem 0.2rem 0.8rem;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+            border-left: 3px solid #b76d68ff;
+        }
+
+        .active .card-title {
+            font-size: 1.5rem;
+            background: rgba(183, 109, 104, 0.2);
+            border-left: 5px solid #b76d68ff;
+            padding: 0.3rem 1.5rem 0.3rem 1.2rem;
+            color: #fff;
+        }
+
+        .card-content {
+            flex: 1;
+            color: #d6d2e6;
+            line-height: 1.5;
+            font-size: 0.9rem;
+            margin: 0.5rem 0 0.2rem;
+            opacity: 0.9;
+        }
+
+        .active .card-content {
+            font-size: 1.05rem;
+            opacity: 1;
+            color: #f0eef5;
+        }
+
+        .card-content p {
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content ul {
+            padding-left: 0;
+            margin: 0.3rem 0;
+            list-style: none;
+        }
+
+        .card-content ul li {
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .card-content ul li i,
+        .card-content ul li .fab,
+        .card-content ul li .fas {
+            width: 1.4rem;
+            text-align: center;
+            color: #b76d68ff;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .card-content ul li .skill-label {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+            flex: 1;
+        }
+
+        .card-content ul li .skill-label .skill-name {
+            font-weight: 600;
+            color: #b76d68ff;
+        }
+
+        .card-content ul li .skill-label .skill-desc {
+            color: #d6d2e6;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .card-content strong {
+            color: #b76d68ff;
+        }
+
+        .card-content a {
+            color: #b76d68ff;
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(183, 109, 104, 0.3);
+        }
+
+        .card-content a:hover {
+            color: #d48a84;
+        }
+
+        /* dropdown accordion styles */
+        .dropdown-section {
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(183, 109, 104, 0.2);
+            border-radius: 1rem;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown-header {
+            background: rgba(183, 109, 104, 0.08);
+            padding: 0.4rem 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #f0eef5;
+            transition: background 0.2s ease;
+            user-select: none;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-header:hover {
+            background: rgba(183, 109, 104, 0.18);
+        }
+
+        .dropdown-header i {
+            transition: transform 0.3s ease;
+            color: #b76d68ff;
+        }
+
+        .dropdown-header.open i {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+            padding: 0 1rem;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .dropdown-body.open {
+            max-height: 800px;
+            padding: 0.6rem 1rem 1rem 1rem;
+        }
+
+        .dropdown-body p {
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-body ul {
+            font-size: 0.95rem;
+        }
+
+        .dropdown-body hr {
+            border: none;
+            border-top: 1px solid rgba(183, 109, 104, 0.15);
+            margin: 0.4rem 0;
+        }
+
+        .active .dropdown-header {
+            background: rgba(183, 109, 104, 0.12);
+        }
+
+        .active .dropdown-header:hover {
+            background: rgba(183, 109, 104, 0.25);
+        }
+
+        /* arrow buttons container */
+        .nav-arrows {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+            align-self: flex-end;
+            flex-shrink: 0;
+        }
+
+        .arrow-btn {
+            background: rgba(183, 109, 104, 0.12);
+            border: 1px solid rgba(183, 109, 104, 0.35);
+            border-radius: 60px;
+            padding: 0.4rem 1rem;
+            font-size: 0.9rem;
+            color: #f0eef5;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(2px);
+            background: rgba(27, 36, 50, 0.7);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .arrow-btn i {
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+            color: #b76d68ff;
+        }
+
+        .arrow-btn:hover {
+            background: rgba(183, 109, 104, 0.25);
+            border-color: #b76d68ff;
+            box-shadow: 0 6px 14px rgba(183, 109, 104, 0.25);
+            transform: scale(1.02);
+        }
+
+        .arrow-btn:hover i {
+            transform: translateX(4px);
+        }
+
+        .arrow-btn:hover .fa-arrow-left {
+            transform: translateX(-4px);
+        }
+
+        .arrow-btn:active {
+            transform: scale(0.96);
+        }
+
+        .card:not(.active) .arrow-btn {
+            opacity: 0.2;
+            pointer-events: none;
+            background: transparent;
+            border-color: transparent;
+            box-shadow: none;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+        }
+
+        .card:not(.active) .arrow-btn i {
+            font-size: 0.8rem;
+        }
+
+        /* make first card active by default (About Me) */
+        .card:first-child {
+            grid-column: span 2;
+            grid-row: span 2;
+            transform: scale(1);
+            opacity: 1;
+            filter: saturate(1) brightness(1.05);
+            background: #1b2432ff;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8),
+                0 0 0 1px #b76d68ff,
+                0 10px 30px -10px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(183, 109, 104, 0.5);
+            padding: 2rem 1.8rem;
+            z-index: 2;
+            height: auto;
+            min-height: 200px;
+        }
+
+        .badge-icon {
+            background: rgba(64, 63, 76, 0.7);
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            color: #d6d2e6;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(183, 109, 104, 0.2);
+            flex-shrink: 0;
+        }
+
+        .active .badge-icon {
+            background: rgba(183, 109, 104, 0.2);
+            color: #f0eef5;
+            border-color: #b76d68ff;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid rgba(183, 109, 104, 0.2);
+            margin: 0.5rem 0 0.8rem;
+        }
+
+        @media (max-width: 800px) {
+            .cv-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+                padding: 1rem 0;
+            }
+            .card.active,
+            .card:first-child {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+            .card {
+                grid-column: span 1;
+                grid-row: span 1;
+                transform: scale(1);
+                opacity: 1;
+                filter: saturate(1) brightness(1);
+                min-height: 120px;
+                padding: 1rem;
+            }
+            .card.active,
+            .card:first-child {
+                grid-column: span 2;
+                grid-row: span 1;
+                padding: 1.5rem;
+                min-height: 160px;
+            }
+            .active .card-title {
+                font-size: 1.2rem;
+            }
+            .card:not(.active) .arrow-btn {
+                display: none;
+            }
+            .card {
+                scroll-margin: 1rem;
+            }
+            .nav-arrows {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .cv-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .card.active,
+            .card:first-child {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+            .card {
+                grid-column: span 1;
+                grid-row: span 1;
+                min-height: 100px;
+            }
+            .card:not(.active) .arrow-btn {
+                display: none;
+            }
+            .card {
+                scroll-margin: 0.5rem;
+            }
+        }
+        /* skill dropdown styles */
+.skill-dropdown {
+    margin-top: 0.3rem;
+    border: 1px solid rgba(183, 109, 104, 0.15);
+    border-radius: 0.8rem;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.skill-dropdown .dropdown-header {
+    background: rgba(183, 109, 104, 0.05);
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+    color: #d6d2e6;
+}
+
+.skill-dropdown .dropdown-header:hover {
+    background: rgba(183, 109, 104, 0.12);
+}
+
+.skill-dropdown .dropdown-body {
+    padding: 0 0.8rem;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.skill-dropdown .dropdown-body.open {
+    padding: 0.4rem 0.8rem 0.8rem 0.8rem;
+}
+
+.skill-dropdown .dropdown-body ul {
+    padding-left: 0.5rem;
+    margin: 0.2rem 0;
+    list-style: disc;
+}
+
+.skill-dropdown .dropdown-body ul li {
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    color: #d6d2e6;
+    display: list-item;
+    gap: 0;
+}
+    </style>
+</head>
+<body>
+    <div class="cv-grid" id="cvGrid">
+<!-- 1. About Me (active by default) -->
+<div class="card active" data-index="0">
+    <div class="card-header">
+        <span class="card-title"><i class="fas fa-user" style="margin-right:6px;"></i>About Me</span>
+        <span class="badge-icon">intro</span>
+    </div>
+    <div class="card-content">
+        <p>From IT classes in Year 1 to present day cybersecurity courses, computer science has always been a passion of mine. Since my early introduction to the world of computer science, tinkering with systems has always sparked my interest and inspired me to dive further into the subject. By Year 8 I started learning Python, developing small programs I would showcase to friends and family. This knowledge hungry mindset eventually led me to discover Linux – after installing it on my laptop, I quickly learnt common commands and began to understand how the operating system functioned. After learning about the WannaCry attack, cybersecurity piqued my interest. I used platforms like TryHackMe and HackTheBox to self-teach real-world skills. I hope to specialise in ethical hacking and red teaming. Outside of tech, I play guitar and skateboard – both require precision and dedication, traits I apply to computer science. Skateboarding has taught me the value of hard work, with some tricks taking months to learn properly.</p>
+    </div>
+    <div class="nav-arrows">
+        <button class="arrow-btn" data-action="prev"><i class="fas fa-arrow-left"></i> <span>prev</span></button>
+        <button class="arrow-btn" data-action="next"><i class="fas fa-arrow-right"></i> <span>next</span></button>
+    </div>
+</div>
+
+        <!-- 2. Experience -->
+        <div class="card" data-index="1">
+            <div class="card-header">
+                <span class="card-title"><i class="fas fa-briefcase" style="margin-right:8px;"></i>Experience</span>
+                <span class="badge-icon">work</span>
+            </div>
+            <div class="card-content">
+                <!-- DROPDOWN 1: Catering -->
+                <div class="dropdown-section">
+                    <div class="dropdown-header" data-target="catering">
+                        <span><i class="fas fa-utensils" style="margin-right:10px; color:#b76d68ff;"></i>Catering</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="dropdown-body" id="catering">
+                        <p><strong>Waiter</strong> · May 2024 – Sep 2024<br> <span style="opacity:0.7;">La Tua Pasta, Bicester Village</span></p>
+                        <ul>
+                            <li>Managed serving orders and clearing tables in a busy environment.</li>
+                            <li>Developed strong communication skills handling customer requests and manager instructions.</li>
+                        </ul>
+                        <hr>
+                        <p><strong>Waiter (temp)</strong> · 28 Sep 2024<br> <span style="opacity:0.7;">Gerrards Cross Sports Club</span></p>
+                        <ul>
+                            <li>Worked synchronously with other waiters to serve food at a private event.</li>
+                            <li>Learned to handle drunk/rude customers politely and professionally.</li>
+                        </ul>
+                        <hr>
+                        <p><strong>Waiter, Cleaner, Assistant Cook</strong> · Jan 2025 – Apr 2025<br> <span style="opacity:0.7;">The Air Raid Shelter Cafe, High Wycombe</span></p>
+                        <ul>
+                            <li>Rotated between roles daily: making orders, serving, clearing tables, cleaning.</li>
+                            <li>Significantly improved communication and problem-solving in stressful situations.</li>
+                            <li>Adapted to a wide variety of customers and their individual needs.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- DROPDOWN 2: Tech -->
+                <div class="dropdown-section">
+                    <div class="dropdown-header" data-target="tech">
+                        <span><i class="fas fa-laptop-code" style="margin-right:10px; color:#b76d68ff;"></i>Tech</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="dropdown-body" id="tech">
+                        <p><strong>Code Ninjas (Instructor)</strong> · May 2025 – Nov 2025<br> <span style="opacity:0.7;">Teaching kids aged 5–14</span></p>
+                        <ul>
+                            <li>Taught computational thinking and coding through fun, progressive challenges.</li>
+                            <li>Led kids to success in a challenging and rewarding environment.</li>
+                            <li>Helped create a supportive learning environment that increases in difficulty as the child progresses.</li>
+                        </ul>
+                        <hr>
+                        <p><strong>Assistant Carer (Tech support)</strong> · Nov 2021 – Jun 2022<br> <span style="opacity:0.7;">The Fremantle Trust, Princes Risborough</span></p>
+                        <ul>
+                            <li>Volunteered weekly, teaching IT skills to employees.</li>
+                            <li>Helped with digital tasks and organised monthly planners.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-arrows">
+                <button class="arrow-btn" data-action="prev"><i class="fas fa-arrow-left"></i> <span>prev</span></button>
+                <button class="arrow-btn" data-action="next"><i class="fas fa-arrow-right"></i> <span>next</span></button>
+            </div>
+        </div>
+
+        <!-- 3. Education -->
+        <div class="card" data-index="2">
+            <div class="card-header">
+                <span class="card-title"><i class="fas fa-graduation-cap" style="margin-right:6px;"></i>Education</span>
+                <span class="badge-icon">academic</span>
+            </div>
+            <div class="card-content">
+                <p><strong>Extended Diploma in IT</strong><br> The Henley College, Henley-on-Thames · 2024 – 2026: Grade N/A</p>
+                <hr>
+                <p><strong>GCSEs</strong><br> Princes Risborough Secondary School<br> 6 GCSEs grade 4 or above, including Maths (5) and English (7)</p>
+                <ul>
+                    <li>Maths (Higher) – 5</li>
+                    <li>English (Higher) – 7</li>
+                </ul>
+            </div>
+            <div class="nav-arrows">
+                <button class="arrow-btn" data-action="prev"><i class="fas fa-arrow-left"></i> <span>prev</span></button>
+                <button class="arrow-btn" data-action="next"><i class="fas fa-arrow-right"></i> <span>next</span></button>
+            </div>
+        </div>
+
+   <!-- 4. Skills -->
+<div class="card" data-index="3">
+    <div class="card-header">
+        <span class="card-title"><i class="fas fa-code" style="margin-right:6px;"></i>Skills</span>
+        <span class="badge-icon">tools</span>
+    </div>
+    <div class="card-content">
+        <ul>
+            <li>
+                <i class="fas fa-users"></i>
+                <span class="skill-label">
+                    <span class="skill-name">People skills</span>
+                    <span class="skill-desc">communication, teamwork, adaptability</span>
+                </span>
+            </li>
+            <li>
+                <i class="fab fa-python"></i>
+                <span class="skill-label">
+                    <span class="skill-name">Python</span>
+                    <span class="skill-desc">
+                        <div class="dropdown-section skill-dropdown">
+                            <div class="dropdown-header" data-target="python-details">
+                                <span>8 years experience - (intermediate) <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                            </div>
+                            <div class="dropdown-body" id="python-details">
+                                <!-- Sub-dropdown 1: Projects -->
+                                <div class="dropdown-section sub-dropdown">
+                                    <div class="dropdown-header" data-target="python-projects">
+                                        <span><i class="fas fa-folder-open"></i> Projects <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                    </div>
+                                    <div class="dropdown-body" id="python-projects">
+                                        <ul>
+                                            <li><strong>Bitcoin Scraper:</strong> Scrapes details on bitcoin wallets using Beautiful Soup</li>
+                                            <li><strong>Craiyon Discord Bot:</strong> A Discord bot to access the Craiyon API from Discord</li>
+                                            <li><strong>Uberduck Discord Bot:</strong> Text to speech in voice channels using the Uberduck API</li>
+                                            <li><strong>Binary Enumerator:</strong> Shows what binaries you have RWX access to. Has a use case for SUID bit vulnerabilities</li>
+                                            <li><strong>IPScanner:</strong> Generates random IPs, checks if they are valid, scans a specified port on the system. Also has Discord webhook support. I rewrite this project in every new language I try</li>
+                                            <li><strong>File Changer:</strong> One of the first Python programs I ever wrote - completely useless. It is here to act as a way to show how my code has improved over time</li>
+                                            <li><strong>File Sorter:</strong> Sorts files into folders based on file extension</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Sub-dropdown 2: Libraries & Frameworks -->
+                                <div class="dropdown-section sub-dropdown">
+                                    <div class="dropdown-header" data-target="python-libraries">
+                                        <span><i class="fas fa-cubes"></i> Libraries & Frameworks <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                    </div>
+                                    <div class="dropdown-body" id="python-libraries">
+                                        <ul>
+                                            <li><strong>BeautifulSoup4:</strong> Used for web scraping in Bitcoin Scraper project</li>
+                                            <li><strong>Requests:</strong> Used for API calls in Discord bot projects</li>
+                                            <li><strong>Discord.py:</strong> Used for creating Discord bots (Craiyon, Uberduck)</li>
+                                           
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Sub-dropdown 3: Coursework -->
+                                <div class="dropdown-section sub-dropdown">
+                                    <div class="dropdown-header" data-target="python-coursework">
+                                        <span><i class="fas fa-graduation-cap"></i> Coursework <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                    </div>
+                                    <div class="dropdown-body" id="python-coursework">
+                                        <ul>
+                                            <li><strong>Unit 1:</strong> Completed OOP module in college, reinforcing knowledge of how OOP langauges function; in general; as well as python specific</li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </span>
+                </span>
+            </li>
+            <li>
+                <i class="fas fa-cog"></i>
+                <span class="skill-label">
+                    <span class="skill-name">Rust Lang</span>
+                    <span class="skill-desc">
+                        <div class="dropdown-section skill-dropdown">
+                            <div class="dropdown-header" data-target="rust-details">
+                                <span>3 years experience - (novice) <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                            </div>
+                            <div class="dropdown-body" id="rust-details">
+                                <!-- Sub-dropdown 1: Projects -->
+                                <div class="dropdown-section sub-dropdown">
+                                    <div class="dropdown-header" data-target="rust-projects">
+                                        <span><i class="fas fa-folder-open"></i> Projects <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                    </div>
+                                    <div class="dropdown-body" id="rust-projects">
+                                        <ul>
+                                            <li><strong>Linux Commands-rs:</strong> A small project rewriting some standard Linux tools in Rust. Tools included: cat. TODO: add more tools</li>
+                                            <li><strong>File Splitter:</strong> A program that splits big files into smaller files. TODO: add basic functionality (repo is pretty much a placeholder at the moment)</li>
+                                            <li><strong>Countdown Timer:</strong> Counts down from a given number. TODO: add option to play noise when countdown is finished</li>
+                                            <li><strong>CSV to JSON:</strong> A program to convert CSV to JSON (and 2D lists)</li>
+                                            <li><strong>Denary to Binary Converter:</strong> Converts numbers from denary to binary</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Sub-dropdown 2: Concepts -->
+                                <div class="dropdown-section sub-dropdown">
+                                    <div class="dropdown-header" data-target="rust-concepts">
+                                        <span><i class="fas fa-brain"></i> Concepts Learned <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                    </div>
+                                    <div class="dropdown-body" id="rust-concepts">
+                                        <ul>
+                                            <li><strong>Ownership & Borrowing:</strong> Applied in rewriting Linux tools and file manipulation projects</li>
+                                            <li><strong>Lifetimes:</strong> Understanding through systems programming concepts</li>
+                                            <li><strong>Traits & Generics:</strong> Used in CSV to JSON converter and binary converter</li>
+                                            <li><strong>Error Handling:</strong> Implemented in all projects, especially file operations</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Sub-dropdown 3: Future Goals -->
+                                <div class="dropdown-section sub-dropdown">
+                                    <div class="dropdown-header" data-target="rust-goals">
+                                        <span><i class="fas fa-rocket"></i> Future Goals <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                    </div>
+                                    <div class="dropdown-body" id="rust-goals">
+                                        <ul>
+                                            <li><strong>Rust Network Modules:</strong> Understand how to further use Rust to interact with networks in; hopefully one day developing my skills to develop POC network exploits as well as reconnaissance tools</li>
+                                            <li><strong>Systems Programming:</strong> Continue exploring low-level programming with Rust</li>
+                                            <li><strong>Open Source Contribution:</strong> Improve my skills to the point I am able to valuably contribute to open-source Rust projects</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </span>
+                </span>
+            </li>
+            <li>
+                <i class="fab fa-linux"></i>
+                <span class="skill-label">
+                    <span class="skill-name">Linux</span>
+                    <span class="skill-desc">
+                        <div class="dropdown-section skill-dropdown">
+                            <div class="dropdown-header" data-target="linux-details">
+                                <span>Used as daily driver for 4 years <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                            </div>
+                            <div class="dropdown-body" id="linux-details">
+                                <!-- Sub-dropdown 1: Distros -->
+                                <div class="dropdown-section sub-dropdown">
+                                    <div class="dropdown-header" data-target="linux-distros">
+                                        <span><i class="fas fa-server"></i> Distros Used <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                    </div>
+                                    <div class="dropdown-body" id="linux-distros">
+                                        <ul>
+                                            <li><strong>Arch Linux:</strong> Daily drove for over a year, experience using the "pacman" and "yay" package managers</li>
+                                            <li><strong>Kali/ Blackarch Linux:</strong> Used inside a Virtual Machine in order to complete TryHackMe, HackTheBox and other similar Cybersecurity challenges</li>
+
+                                            <li><strong>Gentoo:</strong> Did not daily drive for very long due to my preference to Arch Linux but learnt a lot when building the distro</li>
+                                            <li><strong>Ubuntu/Debian:</strong> Lots of experience on both distros and many derivatives of them. Used Debain a lot mainly on my Raspberry Pi. Daily drove ubuntu for a few months, also used POP OS as a gaming distro, before making the switch to Arch</li>
+                                            <li><strong>Manjaro/EndeavourOS:</strong> Another 2 Arch Linux based distros, used both for around 4 months.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Sub-dropdown 2: Projects -->
+                                <div class="dropdown-section sub-dropdown">
+                                    <div class="dropdown-header" data-target="linux-projects">
+                                        <span><i class="fas fa-folder-open"></i> Projects & Configurations <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                    </div>
+                                    <div class="dropdown-body" id="linux-projects">
+                                        <ul>
+                                            <li><strong>Linux Commands-rs:</strong> Rewriting Linux tools in Rust shows deep understanding of system commands</li>
+                                            <li><strong>Server Setup:</strong> Ran a small PI server for local FTP storage, website hosting and scripting. Current plans to build a new local server for learning purposes (e.g. configuring web servers).</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Sub-dropdown 3: Skills -->
+                                <div class="dropdown-section sub-dropdown">
+                                    <div class="dropdown-header" data-target="linux-skills">
+                                        <span><i class="fas fa-terminal"></i> Command Line Skills <i class="fas fa-chevron-down" style="margin-left:8px;"></i></span>
+                                    </div>
+                                    <div class="dropdown-body" id="linux-skills">
+                                        <ul>
+                                            <li><strong>Package Managers:</strong> Experience with apt, pacman, yay, flatpak</li>
+                                            <li><strong>System Administration:</strong> Daily driving for multiple years has led me to gain a strong understanding of all basic commands as well as systemd and other sys-admin releated commands</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </span>
+                </span>
+            </li>
+            <li>
+                <i class="fab fa-git-alt"></i>
+                <span class="skill-label">
+                    <span class="skill-name">Git</span>
+                    <span class="skill-desc">version control</span>
+                </span>
+            </li>
+            <li>
+                <i class="fas fa-shield-alt"></i>
+                <span class="skill-label">
+                    <span class="skill-name">Cybersecurity</span>
+                    <span class="skill-desc">TryHackMe - see links, HackTheBox</span>
+                </span>
+            </li>
+            <li>
+                <i class="fas fa-shield-alt"></i>
+                <span class="skill-label">
+                    <span class="skill-name">Codewars</span>
+                    <span class="skill-desc">see links</span>
+                </span>
+            </li>
+            <li>
+                <i class="fas fa-file-excel"></i>
+                <span class="skill-label">
+                    <span class="skill-name">Microsoft Excel</span>
+                    <span class="skill-desc">Received Distinction in Excel: Data Modelling Unit 5</span>
+                </span>
+            </li>
+            <li>
+                <i class="fas fa-file-word"></i>
+                <span class="skill-label">
+                    <span class="skill-name">Microsoft Word</span>
+                    <span class="skill-desc">Used for creating documents for many years</span>
+                </span>
+            </li>
+            <li>
+                <i class="fas fa-file-powerpoint"></i>
+                <span class="skill-label">
+                    <span class="skill-name">Microsoft PowerPoint</span>
+                    <span class="skill-desc">Used for creating powerpoints for many years</span>
+                </span>
+            </li>
+            <li>
+                <i class="fas fa-database"></i>
+                <span class="skill-label">
+                    <span class="skill-name">Microsoft Access</span>
+                    <span class="skill-desc">Received Merit in Access: Creating Systems To Manage Information Unit 2</span>
+                </span>
+            </li>
+            <li>
+                <i class="fab fa-windows"></i>
+                <span class="skill-label">
+                    <span class="skill-name">Windows</span>
+                    <span class="skill-desc">Used as home desktop PC, entry level command line experience and understanding of Entry Windows Server</span>
+                </span>
+            </li>
+            <li>
+                <i class="fab fa-apple"></i>
+                <span class="skill-label">
+                    <span class="skill-name">macOS</span>
+                    <span class="skill-desc">Current daily driver</span>
+                </span>
+            </li>
+            <li>
+                <i class="fab fa-html5"></i>
+                <span class="skill-label">
+                    <span class="skill-name">HTML</span>
+                    <span class="skill-desc">Experience from Year 8 - developing my own websites along with a Website Development Unit</span>
+                </span>
+            </li>
+            <li>
+                <i class="fab fa-css3-alt"></i>
+                <span class="skill-label">
+                    <span class="skill-name">CSS</span>
+                    <span class="skill-desc">See HTML</span>
+                </span>
+            </li>
+            <li>
+                <i class="fab fa-js"></i>
+                <span class="skill-label">
+                    <span class="skill-name">JavaScript</span>
+                    <span class="skill-desc">See HTML</span>
+                </span>
+            </li>
+            <li>
+                <i class="fas fa-code"></i>
+                <span class="skill-label">
+                    <span class="skill-name">VS Code</span>
+                    <span class="skill-desc">Main IDE for many years, solid understanding of plugins and shortcuts</span>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="nav-arrows">
+        <button class="arrow-btn" data-action="prev"><i class="fas fa-arrow-left"></i> <span>prev</span></button>
+        <button class="arrow-btn" data-action="next"><i class="fas fa-arrow-right"></i> <span>next</span></button>
+    </div>
+</div>
+        <!-- 5. References -->
+        <div class="card" data-index="4">
+            <div class="card-header">
+                <span class="card-title"><i class="fas fa-address-book" style="margin-right:6px;"></i>References</span>
+                <span class="badge-icon">contact</span>
+            </div>
+            <div class="card-content">
+                <p><strong>Nick Axford</strong><br> Gerrards Cross Sports Club<br> <a href="tel:+447557896889">+44 7557 896 889</a></p>
+                <p style="margin-top:0.8rem;"><i class="fas fa-envelope" style="opacity:0.6; margin-right:6px;"></i> Available on request</p>
+            </div>
+            <div class="nav-arrows">
+                <button class="arrow-btn" data-action="prev"><i class="fas fa-arrow-left"></i> <span>prev</span></button>
+                <button class="arrow-btn" data-action="next"><i class="fas fa-arrow-right"></i> <span>next</span></button>
+            </div>
+        </div>
+
+       <!-- 6. Web & Social -->
+<div class="card" data-index="5">
+    <div class="card-header">
+        <span class="card-title"><i class="fas fa-globe" style="margin-right:6px;"></i>Web & Social</span>
+        <span class="badge-icon">online</span>
+    </div>
+    <div class="card-content">
+        <p><i class="fab fa-github" style="margin-right:8px; color:#b76d68ff;"></i> <a href="https://github.com/tony-mall" target="_blank">github.com/tony-mall</a></p>
+        <p style="margin-top:0.5rem;"><i class="fas fa-shield-alt" style="margin-right:8px; color:#b76d68ff;"></i> <a href="https://tryhackme.com/p/Giddybox" target="_blank">tryhackme.com/p/Giddybox</a></p>
+        <p style="margin-top:0.5rem;"><i class="fas fa-code" style="margin-right:8px; color:#b76d68ff;"></i> <a href="https://www.codewars.com/users/pwn4d" target="_blank">codewars.com/users/pwn4d</a></p>
+    </div>
+    <div class="nav-arrows">
+        <button class="arrow-btn" data-action="prev"><i class="fas fa-arrow-left"></i> <span>prev</span></button>
+        <button class="arrow-btn" data-action="next"><i class="fas fa-arrow-right"></i> <span>next</span></button>
+    </div>
+</div>
+    </div>
+
+    <script>
+        (function() {
+            // --- dropdown toggle ---
+            const dropdownHeaders = document.querySelectorAll('.dropdown-header');
+            dropdownHeaders.forEach(header => {
+                header.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const targetId = this.dataset.target;
+                    const body = document.getElementById(targetId);
+                    if (!body) return;
+                    body.classList.toggle('open');
+                    this.classList.toggle('open');
+                    const icon = this.querySelector('i.fa-chevron-down');
+                    if (icon) {
+                        icon.style.transform = body.classList.contains('open') ? 'rotate(180deg)' :
+                            'rotate(0deg)';
+                    }
+                });
+            });
+
+            // --- card navigation ---
+            const cards = document.querySelectorAll('.card');
+            const grid = document.getElementById('cvGrid');
+
+            function setActiveCard(index) {
+                cards.forEach((card, i) => {
+                    if (i === index) {
+                        card.classList.add('active');
+                    } else {
+                        card.classList.remove('active');
+                    }
+                });
+            }
+
+            // initial active: card index 0 (About Me)
+            setActiveCard(0);
+
+            function scrollToActiveCard() {
+                const active = document.querySelector('.card.active');
+                if (!active) return;
+
+                // Calculate the card's position relative to the viewport
+                const rect = active.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const windowWidth = window.innerWidth;
+
+                // Calculate the offset needed to center the card
+                // Account for the card being larger when active (span 2)
+                const scrollY = window.scrollY + rect.top - (windowHeight / 2) + (rect.height / 2);
+                const scrollX = window.scrollX + rect.left - (windowWidth / 2) + (rect.width / 2);
+
+                window.scrollTo({
+                    top: scrollY,
+                    left: scrollX,
+                    behavior: 'smooth'
+                });
+            }
+
+            setTimeout(scrollToActiveCard, 150);
+
+            function getNextIndex(currentIndex) {
+                return (currentIndex + 1) % cards.length;
+            }
+
+            function getPrevIndex(currentIndex) {
+                return (currentIndex - 1 + cards.length) % cards.length;
+            }
+
+            grid.addEventListener('click', function(e) {
+                const target = e.target.closest('.arrow-btn');
+                if (!target) return;
+                e.preventDefault();
+
+                const card = target.closest('.card');
+                if (!card) return;
+
+                const activeCard = document.querySelector('.card.active');
+                if (!activeCard) return;
+
+                // only allow clicks on active card's arrows
+                if (card !== activeCard) return;
+
+                let activeIndex = -1;
+                cards.forEach((c, i) => {
+                    if (c.classList.contains('active')) activeIndex = i;
+                });
+                if (activeIndex === -1) return;
+
+                const action = target.dataset.action;
+                let nextIndex;
+                if (action === 'next') {
+                    nextIndex = getNextIndex(activeIndex);
+                } else if (action === 'prev') {
+                    nextIndex = getPrevIndex(activeIndex);
+                } else {
+                    return;
+                }
+
+                setActiveCard(nextIndex);
+
+                // Wait for the DOM to update with the new active class, then scroll
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        scrollToActiveCard();
+                    });
+                });
+            });
+
+            // Also re-center on window resize
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(scrollToActiveCard, 100);
+            });
+        })();
+    </script>
+</body>
+</html>
