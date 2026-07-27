@@ -568,164 +568,6 @@
             font-size: 0.8rem;
         }
 
-        /* Cover letter banner */
-        .cover-letter-banner {
-            width: 100%;
-            max-width: 1200px;
-            margin-bottom: 1.5rem;
-            border-radius: 1.5rem;
-            border: 1px solid rgba(183, 109, 104, 0.5);
-            background: #1b2432ff;
-            box-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.75),
-                        0 0 0 1px rgba(183, 109, 104, 0.15);
-            overflow: hidden;
-        }
-
-        .cover-letter-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 1.75rem;
-            cursor: pointer;
-            user-select: none;
-            transition: background 0.2s ease;
-        }
-
-        .cover-letter-toggle:hover {
-            background: rgba(183, 109, 104, 0.1);
-        }
-
-        .cover-letter-toggle-label {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            color: #f0eef5;
-            font-weight: 600;
-            font-size: 1.05rem;
-            letter-spacing: -0.01em;
-        }
-
-        .cover-letter-toggle-label i.fa-file-signature {
-            color: #b76d68ff;
-            font-size: 1.1rem;
-        }
-
-        .cover-letter-toggle-hint {
-            color: #d6d2e6;
-            opacity: 0.6;
-            font-size: 0.8rem;
-            font-weight: 400;
-            margin-left: 0.4rem;
-        }
-
-        .cover-letter-chevron {
-            color: #b76d68ff;
-            transition: transform 0.3s ease;
-            font-size: 1rem;
-        }
-
-        .cover-letter-toggle.open .cover-letter-chevron {
-            transform: rotate(180deg);
-        }
-
-        .cover-letter-panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.1);
-            background: rgba(0, 0, 0, 0.15);
-        }
-
-        .cover-letter-panel.open {
-            max-height: 65vh;
-            overflow-y: auto;
-        }
-
-        /* stylised scrollbar for the cover letter panel */
-        .cover-letter-panel::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        .cover-letter-panel::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.25);
-            border-radius: 10px;
-            margin: 6px 0;
-        }
-
-        .cover-letter-panel::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #d48a84, #b76d68ff);
-            border-radius: 10px;
-            border: 2px solid rgba(27, 36, 50, 0.9);
-        }
-
-        .cover-letter-panel::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #e0968f, #c47b74);
-        }
-
-        .cover-letter-panel {
-            scrollbar-width: thin;
-            scrollbar-color: #b76d68ff rgba(0, 0, 0, 0.25);
-        }
-
-        .cover-letter-body {
-            padding: 0.5rem 1.25rem 1.75rem 1.75rem;
-            color: #d6d2e6;
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        .cover-letter-body p {
-            margin-bottom: 0.9rem;
-        }
-
-        .cover-letter-body p:last-child {
-            margin-bottom: 0;
-        }
-
-        .cover-letter-subhead {
-            color: #b76d68ff;
-            font-weight: 700;
-            font-size: 1.05rem;
-            letter-spacing: 0.01em;
-            margin-top: 1.2rem;
-            margin-bottom: 0.4rem;
-            padding-bottom: 0.3rem;
-            border-bottom: 1px solid rgba(183, 109, 104, 0.25);
-        }
-
-        .cover-letter-subhead:first-child {
-            margin-top: 0;
-        }
-
-        .cover-letter-subsubhead {
-            color: #d6a19cff;
-            font-weight: 600;
-            font-size: 0.92rem;
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
-            margin-top: 0.9rem;
-            margin-bottom: 0.3rem;
-            padding-left: 0.9rem;
-            border-left: 2px solid rgba(183, 109, 104, 0.4);
-        }
-
-        .cover-letter-signoff {
-            margin-top: 1.2rem;
-            color: #f0eef5;
-        }
-
-        @media (max-width: 500px) {
-            .cover-letter-toggle {
-                padding: 0.85rem 1.2rem;
-            }
-            .cover-letter-body {
-                padding: 0.5rem 0.9rem 1.2rem 1.2rem;
-                font-size: 0.9rem;
-            }
-            .cover-letter-toggle-hint {
-                display: none;
-            }
-        }
-
         /* Responsive */
         @media (max-width: 800px) {
             .cv-grid {
@@ -846,39 +688,6 @@
         </div>
     </div>
 
-    <!-- Cover Letter Banner -->
-    <div class="cover-letter-banner">
-        <div class="cover-letter-toggle" id="coverLetterToggle">
-            <span class="cover-letter-toggle-label">
-                <i class="fas fa-file-signature"></i>
-                Cover Letter
-                <span class="cover-letter-toggle-hint">click to read</span>
-            </span>
-            <i class="fas fa-chevron-down cover-letter-chevron"></i>
-        </div>
-        <div class="cover-letter-panel" id="coverLetterPanel">
-            <div class="cover-letter-body">
-                <p>Dear Hiring Manager,</p>
-                <p class="cover-letter-subhead">Introduction</p>
-                <p>My name is Tony, I'm an 18 year old computer science enthusiast with a passion for technical IT work. I've always had a huge interest in computer science since my first ICT lesson in year one at primary school. Over the years I have expanded my knowledge through school and personal projects. From my first introduction to Python, a project controlling Christmas lights I made with my dad in primary school, to building a Linux system from scratch using Gentoo, computer science has always been a primary interest and a major part of my academic and recreational life. I'm looking for a position where my skills can be tested and actively expanded, using problem solving and critical thinking skills to complete tasks to a high standard, processing through the ranks of a company to continuously improve my skills and qualifications.</p>
-                <p class="cover-letter-subhead">Skills</p>
-                <p>Given the large amount of time that I have had a hyper-fixated interest in computer science, I have amassed numerous technical skills in a range of areas. Below I will talk through said skills in more detail.</p>
-                <p class="cover-letter-subsubhead">Linux</p>
-                <p>I first discovered the Linux operating system in year 8 after discovering a feature called "Linux development environment" on my school Chromebook. I became increasingly fascinated with its unique open-source nature as well as its use in most major server solutions. Despite this, I still wanted to be able to run a proper Linux system on my Chromebook, instead of just an integrated development environment. This led me to discover a project called Crouton on Github, which, after removing the WP screw on my motherboard, allowed me to run a full version of Linux on my computer. Following this I used Linux as my daily driver for years, learning how the command line, file system and package managers worked and taking great interest into the extent you can "tinker" with the operating system. Over the next few years I began daily driving Arch Linux on my home PC as well as learning more about the operating system by building a Gentoo machine from scratch. I now use macOS and use my Linux distribution inside of a virtual machine for cybersecurity and software development related tasks.</p>
-                <p class="cover-letter-subsubhead">Programming</p>
-                <p>As aforementioned in the first paragraph, I have been exposed to Python from a very young age, giving me a long time in which to learn how the programming language works. I have had experience working with many different user and core packages, using these to create my own projects (see linked Github). After a few years of Python programming I was introduced to the 3 major web development languages &ndash; HTML, CSS and JS &ndash; similarly to Python I began to learn these languages and develop my own websites. More recently (about 4 years ago), I discovered the programming language Rust. Rust has consistently been my favourite language since, with its clean syntax and unique approach to memory management, allowing me to create programs that compete with other low level languages, like C, in terms of execution speed. The best way to gauge my coding ability will be through either my Github or Codewars account (both of which are linked in my CV).</p>
-                <p class="cover-letter-subsubhead">TryHackMe / HackTheBox</p>
-                <p>My natural interest in tinkering and exploring the technical workings of systems led me to discovering the world of cybersecurity. I was first introduced to this world after learning about password hashes and wanting to test my theoretical knowledge with a password cracking tool called John the Ripper (all on my own passwords of course), on my previously mentioned Linux development environment on my Chromebook. This interest led me to discover the websites TryHackMe and HackTheBox, both offering a similar service in which you are given an IP address to legally attempt to compromise in order to learn. Most of my time has been spent on TryHackMe due to purchasing a premium membership to complete "rooms" on different subjects, each room taking a different tool or concept and explaining it in a practical, hands on way. My TryHackMe with my completed rooms (49+) is linked on my CV for review.</p>
-                <p>There are of course many more technologies and languages I have had an interest in but listing and discussing all of them is outside the scope of this cover letter, better saved for an in person interview if the need to do so presents itself &ndash; a more extensive list of skills can be found elsewhere on this site.</p>
-                <p class="cover-letter-subhead">Education</p>
-                <p>The past 2 years I have been a student at The Henley College completing a Level 3 in Information Technology. Although possessing a strong interest in all areas of Computer Science, I found the course unengaging with very minimal practical work. Despite the learning style of the course not being well-suited to my ADHD, I have still learnt an enormous amount from my time at Henley, completing many units in a wide range of topics (Excel, Access, Cybersecurity, Website Development, Object Oriented Programming, IT Business, IoT Devices, etc). In the last few weeks of being at Henley, one of my teachers (a last minute agency hire) made the choice to leave the college, rendering my incomplete bits of coursework unable to be marked. This was a massive disappointment to me as, although I did not really enjoy the course, I knew it was a stepping stone to a degree apprenticeship where I know I would be challenged more, with more engaging subject material. After some self-reflection and discussion with my parents, instead of attempting to redo a college year, I feel like I would perform much better in a real work environment where I have personal responsibility for my job and am able to apply my technical skills to real-world problems.</p>
-                <p class="cover-letter-subhead">Why I am suitable for this role</p>
-                <p>If I am chosen for this role I will bring not only my current technical skills and enthusiasm to learn more about computer science, but also my strong social skills I have developed from working in numerous cafes and restaurants. I am used to being a part of a team and working solo, performing best with a mix of the two (having my own solo responsibilities for a team/project in which we collaborate). I've been raised in a household with strong morals and been taught to be a hard, consistent worker wherever I am needed. I thank you for reading and considering my application and am excited to hear from you in the future.</p>
-                <p class="cover-letter-signoff">Kind regards,<br>Tony Mallett</p>
-            </div>
-        </div>
-    </div>
-
     <div class="cv-grid" id="cvGrid">
 <!-- 1. About Me (active by default) -->
 <div class="card active" data-index="0">
@@ -987,7 +796,7 @@
                 <span class="badge-icon">academic</span>
             </div>
             <div class="card-content">
-                <p><strong>Extended Diploma in IT</strong><br> The Henley College, Henley-on-Thames · 2024 – 2026: Incomplete (See cover letter)</p>
+                <p><strong>Extended Diploma in IT</strong><br> The Henley College, Henley-on-Thames · 2024 – 2026: Incomplete</p>
                 <hr>
                 <p><strong>GCSEs</strong><br> Princes Risborough Secondary School<br> 6 GCSEs grade 4 or above, including Maths (5) and English (7)</p>
                 <ul>
@@ -1367,16 +1176,6 @@
                     }
                 });
             });
-
-            // --- cover letter banner toggle ---
-            const coverLetterToggle = document.getElementById('coverLetterToggle');
-            const coverLetterPanel = document.getElementById('coverLetterPanel');
-            if (coverLetterToggle && coverLetterPanel) {
-                coverLetterToggle.addEventListener('click', function() {
-                    this.classList.toggle('open');
-                    coverLetterPanel.classList.toggle('open');
-                });
-            }
 
             // --- card navigation ---
             const cards = document.querySelectorAll('.card');
